@@ -3,9 +3,11 @@ package com.example.udemypro.controller;
 
 import com.example.udemypro.model.data.Page;
 import com.example.udemypro.repository.PageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -14,11 +16,9 @@ import java.util.List;
 @RequestMapping("/admin/pages")
 public class AdminPagesController {
 
-    private final PageRepository pageRepository;
+    @Autowired
+    private  PageRepository pageRepository;
 
-    public AdminPagesController(PageRepository pageRepository) {
-        this.pageRepository = pageRepository;
-    }
 
     @GetMapping()
     public String index(Model model){
@@ -29,7 +29,10 @@ public class AdminPagesController {
         return "/admin/pages/index";
     }
     @GetMapping("/add")
-    public String add(){
+    public String add(Model model){ //@ModelAtributes Page page parametr kimi verende xeta verdi
+
+      model.addAttribute("page",new Page());
+
         return "/admin/pages/add";
     }
 }

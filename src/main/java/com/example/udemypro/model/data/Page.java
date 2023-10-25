@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +22,11 @@ public class Page {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    String title;
 
+    @Size(min=2,message="Title must be at least 2 characters long")
+    String title;
     String slug;
+    @Size(min=5,message="Content must be at least 2 characters long")
     String content;
     int sorting;
 
